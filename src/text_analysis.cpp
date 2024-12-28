@@ -3,6 +3,7 @@
 void failo_tvarkymas(){
     string failo_pavadinimas;
     std::ifstream failas;
+    // string eil;
 
     cout << "Įveskite failo pavadinimą: ";
     
@@ -22,7 +23,13 @@ void failo_tvarkymas(){
                 string zodis;
 
                 while(strstream >> zodis){
-                    cout << zodis << endl;
+                    string naujas_zodis;
+                    for (char ch : zodis) {
+                        if(isalnum(ch)){
+                            naujas_zodis += ch;
+                        }
+                    }
+                    cout << naujas_zodis << endl;
                 }
 
             }
