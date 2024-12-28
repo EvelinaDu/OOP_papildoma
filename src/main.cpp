@@ -3,7 +3,7 @@
 
 int main(){
 
-
+    failo_tvarkymas();
 
 
     system("pause");
