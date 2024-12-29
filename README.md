@@ -14,5 +14,6 @@ Atidarius failą atliekami šie veiksmai:
 - Toliau žodis yra atnaujinamas, panaikinami skyrybos ženklai, kurie galėjo būti prijungti, paimti kaip žodžio dalis;
 - Žodis išsaugomas kaip unikalus raktas, o jo kiekis, kuris yra atnaujinamas, kaip reikšmė.
 - Žodis yra išsaugojamas dar kartą kaip unikalus raktas jau kitoje struktūroje, kurioje taip pat išsaugomas pasikartojimų kiekis bei eilučių rinkinys;
+
 Toliau vyksta rezultatų atspausdinimas, spausdinami tik tų žodžių duomenys, kurių pasikartojimų skaičius didesnis negu 1. 
 Prieš atspausdinant rastus URL adresus, vartotojui suteikiamas pasirinkimas dėl rezultatų spausdinimo vietos, ar spausdinama terminale, ar faile.
