@@ -5,7 +5,7 @@ string pakeistas_zodis(const string& zodis) {
 
     for (char ch : zodis) {
         ch = tolower(ch);
-        if (!ispunct(ch)) {         // ispunct() Funkcija grąžina true, jei simbolis yra skyrybos ženklas, kitaip – false.
+        if (!ispunct(ch) && !isdigit(ch)) {         // ispunct() Funkcija grąžina true, jei simbolis yra skyrybos ženklas, kitaip – false.
             naujas_zodis += ch;
         }
     }
@@ -17,12 +17,12 @@ void spausdinimas_zodziu_kiekis(const map<string, int>& zodziu_kiekis){
     ofstream failas("kiekis.txt");
 
     if(failas.is_open()){
-        failas << left << setw(15) << "Žodis" << setw(10) << "Kiekis" << endl;
-        failas << string(21, '-') << endl;
+        failas << left << setw(20) << "Žodis" << setw(10) << "Kiekis" << endl;
+        failas << string(27, '-') << endl;
 
         for (const auto& i : zodziu_kiekis){
             if(i.second > 1){
-                failas << left << setw(15) << i.first << setw(10) << i.second << endl;
+                failas << left << setw(20) << i.first << setw(10) << i.second << endl;
             }
         }
 
@@ -37,13 +37,13 @@ void spausdinimas_zodziu_eil(const map<string, pair<int, set<int>>>& zodziu_eil)
     ofstream failas("eil.txt");
 
     if(failas.is_open()){
-        failas << left << setw(15) << "Žodis" << setw(1) << "Eilutės" << endl;
+        failas << left << setw(20) << "Žodis" << setw(1) << "Eilutės" << endl;
         failas << string(35, '-') << endl;
 
         for(const auto& i : zodziu_eil){
 
             if(i.second.first > 1){
-                failas << left << setw(15) << i.first << setw(1) << "{";
+                failas << left << setw(20) << i.first << setw(1) << "{";
                 bool pirmas = true;
 
                 for(auto it = i.second.second.begin(); it != i.second.second.end(); ++it){
@@ -139,10 +139,14 @@ void failo_tvarkymas(){
                     if (std::regex_match(zodis, url)){
                         url_vektorius.push_back(zodis);
                     }
+
                     string naujas_zodis = pakeistas_zodis(zodis);
-                    zodziu_kiekis[naujas_zodis]++;
-                    zodziu_eil[naujas_zodis].first++;
-                    zodziu_eil[naujas_zodis].second.insert(eil_nr);
+
+                    if(!naujas_zodis.empty()){
+                        zodziu_kiekis[naujas_zodis]++;
+                        zodziu_eil[naujas_zodis].first++;
+                        zodziu_eil[naujas_zodis].second.insert(eil_nr);
+                    }
                 }
             }
             cout << "Failas sėkmingai perskaitytas!" << endl;
@@ -156,6 +160,11 @@ void failo_tvarkymas(){
     spausdinimas_zodziu_kiekis(zodziu_kiekis);
     spausdinimas_zodziu_eil(zodziu_eil);
     string pasirinkimas = pasirinkimas_url();
-    url_paskirstymas(pasirinkimas, url_vektorius);
+    if(!url_vektorius.empty()){
+        url_paskirstymas(pasirinkimas, url_vektorius);
+    } else{ 
+        cout << "URL adresai nerasti." << endl;
+    }
+    
 }
 
