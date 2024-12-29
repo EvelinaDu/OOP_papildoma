@@ -5,7 +5,6 @@ int main(){
 
     failo_tvarkymas();
 
-
     system("pause");
     return 0;
 }

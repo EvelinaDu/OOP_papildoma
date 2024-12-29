@@ -10,7 +10,8 @@
 
 #include <map>
 #include <set>
-#include <utility>
+
+#include <cctype>
 
 #include <regex>
 #include <algorithm>
@@ -21,6 +22,8 @@ using std::endl;
 using std::string;
 using std::setw;
 using std::left;
+using std::ifstream;
+using std::ofstream;
 using std::map;
 using std::set;
 using std::pair;

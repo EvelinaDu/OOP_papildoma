@@ -2,25 +2,30 @@
 
 string pakeistas_zodis(const string& zodis) {
     string naujas_zodis;
+
     for (char ch : zodis) {
         ch = tolower(ch);
-        if (!ispunct(ch)) {
+        if (!ispunct(ch)) {         // ispunct() Funkcija grąžina true, jei simbolis yra skyrybos ženklas, kitaip – false.
             naujas_zodis += ch;
         }
     }
+
     return naujas_zodis;
 }
 
-void spausdinimas_zodziu_kiekis(const std::map<string, int>& zodziu_kiekis){
-    std::ofstream failas("kiekis.txt");
+void spausdinimas_zodziu_kiekis(const map<string, int>& zodziu_kiekis){
+    ofstream failas("kiekis.txt");
+
     if(failas.is_open()){
         failas << left << setw(15) << "Žodis" << setw(10) << "Kiekis" << endl;
         failas << string(21, '-') << endl;
+
         for (const auto& i : zodziu_kiekis){
             if(i.second > 1){
                 failas << left << setw(15) << i.first << setw(10) << i.second << endl;
             }
         }
+
         cout << "Rezultatai išsaugoti faile 'kiekis.txt' "<< endl;
         failas.close();
     } else{
@@ -29,24 +34,27 @@ void spausdinimas_zodziu_kiekis(const std::map<string, int>& zodziu_kiekis){
 }
 
 void spausdinimas_zodziu_eil(const map<string, pair<int, set<int>>>& zodziu_eil){
-    std::ofstream failas("eil.txt");
+    ofstream failas("eil.txt");
+
     if(failas.is_open()){
         failas << left << setw(15) << "Žodis" << setw(1) << "Eilutės" << endl;
-        failas << string(30, '-') << endl;
+        failas << string(35, '-') << endl;
+
         for(const auto& i : zodziu_eil){
+
             if(i.second.first > 1){
                 failas << left << setw(15) << i.first << setw(1) << "{";
                 bool pirmas = true;
+
                 for(auto it = i.second.second.begin(); it != i.second.second.end(); ++it){
                     if(!pirmas){
                         failas << ", ";
                     }
-                    failas << *it;
+                    failas << *it;          // įrašomas reikšmė, į kurią rodo rodyklė
                     pirmas = false;
                 }
                 failas << "}" << endl;
             }
-            
         }
 
         cout << "Rezultatai išsaugoti faile 'eil.txt' "<< endl;
@@ -78,7 +86,7 @@ string pasirinkimas_url(){
 }
 
 void spausdinimas_url(std::ostream &out, vector<string> url_vektorius){
-    out  << left << setw(15) << "Rasti url adresai: " << endl;
+    out  << left << setw(15) << "Rasti URL adresai: " << endl;
 
     for (const auto& url : url_vektorius) {
         out << url << endl;
@@ -91,7 +99,7 @@ void url_paskirstymas(string pasirinkimas, vector<string> url_vektorius){
         spausdinimas_url(cout, url_vektorius);
 
     } else if(pasirinkimas == "F"){
-        std::ofstream failas("url.txt");
+        ofstream failas("url.txt");
         if(failas.is_open()){
            spausdinimas_url(failas, url_vektorius);
         }
@@ -102,9 +110,9 @@ void url_paskirstymas(string pasirinkimas, vector<string> url_vektorius){
 
 void failo_tvarkymas(){
     string failo_pavadinimas;
-    std::ifstream failas;
-    map<string, int> zodziu_kiekis;
-    map<string, pair<int, set<int>>> zodziu_eil;
+    ifstream failas;
+    map<string, int> zodziu_kiekis;                 // saugo žodį ir jo pasikartojimų kiekį
+    map<string, pair<int, set<int>>> zodziu_eil;    // saugo žodį, jo pasikartojimų kiekį bei eilučių, kuriose buvo rastas, rinkynį
     int eil_nr = 0;
     vector<string> url_vektorius;
 
@@ -114,7 +122,7 @@ void failo_tvarkymas(){
     
     while(true){
         try{
-            std::getline(cin, failo_pavadinimas);
+            getline(cin, failo_pavadinimas);
             failas.open(failo_pavadinimas);
 
             if(!failas.is_open()){
@@ -122,7 +130,7 @@ void failo_tvarkymas(){
             }
             cout << "Failas sėkmingai atidarytas!" << endl;
             string eil;
-            while(std::getline(failas, eil)){
+            while(getline(failas, eil)){
                 std::stringstream strstream(eil);
                 string zodis;
                 eil_nr++;
