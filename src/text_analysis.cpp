@@ -117,7 +117,7 @@ void failo_tvarkymas(){
     int eil_nr = 0;
     set<string> url_set;
 
-    regex url(R"(((https?://www\.)|(www\.))?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(/[^\s]*)?[.,;]?)");
+    std::regex url(R"(((https?://www\.)|(www\.))?[a-zA-Z0-9-]+\.([a-zA-Z]{2}|com|org|net|int|edu|gov|mil|xyz|info|biz|site|tech|app|store|online|google|youtube|wiki|technology|social|network|link|gift|events)(/[^\s]*)?[.,;!?]?)");
 
     cout << "Įveskite failo pavadinimą: ";
     
@@ -138,7 +138,7 @@ void failo_tvarkymas(){
 
                 while(strstream >> zodis){
                     if (std::regex_match(zodis, url)){
-                        if(!zodis.empty() && (zodis.back() == '.' || zodis.back() == ',' || zodis.back() == ';')){
+                        if(!zodis.empty() && (zodis.back() == '.' || zodis.back() == ',' || zodis.back() == ';' || zodis.back() == '!' || zodis.back() == '?')){
                             zodis.pop_back();
                         }
                         url_set.insert(zodis);
