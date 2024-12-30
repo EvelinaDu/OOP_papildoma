@@ -99,7 +99,7 @@ void url_paskirstymas(string pasirinkimas, vector<string> url_vektorius){
         spausdinimas_url(cout, url_vektorius);
 
     } else if(pasirinkimas == "F"){
-        ofstream failas("url.txt");
+        ofstream failas("url_info.txt");
         if(failas.is_open()){
            spausdinimas_url(failas, url_vektorius);
         }
@@ -116,7 +116,7 @@ void failo_tvarkymas(){
     int eil_nr = 0;
     vector<string> url_vektorius;
 
-    regex url(R"((https?:\/\/|www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+(/[^\s]*)?)");
+    regex url(R"(((https?://www\.)|(www\.))?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(/[^\s]*)?[.,;]?)");
 
     cout << "Įveskite failo pavadinimą: ";
     
@@ -137,15 +137,18 @@ void failo_tvarkymas(){
 
                 while(strstream >> zodis){
                     if (std::regex_match(zodis, url)){
+                        if(!zodis.empty() && (zodis.back() == '.' || zodis.back() == ',' || zodis.back() == ';')){
+                            zodis.pop_back();
+                        }
                         url_vektorius.push_back(zodis);
-                    }
+                    } else{
+                        string naujas_zodis = pakeistas_zodis(zodis);
 
-                    string naujas_zodis = pakeistas_zodis(zodis);
-
-                    if(!naujas_zodis.empty()){
-                        zodziu_kiekis[naujas_zodis]++;
-                        zodziu_eil[naujas_zodis].first++;
-                        zodziu_eil[naujas_zodis].second.insert(eil_nr);
+                        if(!naujas_zodis.empty()){
+                            zodziu_kiekis[naujas_zodis]++;
+                            zodziu_eil[naujas_zodis].first++;
+                            zodziu_eil[naujas_zodis].second.insert(eil_nr);
+                        }
                     }
                 }
             }
@@ -156,7 +159,7 @@ void failo_tvarkymas(){
             cout << e.what();
         }
     }
-
+    cout << "KIEKIS" << zodziu_eil.size() << " " << zodziu_kiekis.size() << endl;
     spausdinimas_zodziu_kiekis(zodziu_kiekis);
     spausdinimas_zodziu_eil(zodziu_eil);
     string pasirinkimas = pasirinkimas_url();
