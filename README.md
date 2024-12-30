@@ -17,3 +17,25 @@ Atidarius failą atliekami šie veiksmai:
 
 Toliau vyksta rezultatų atspausdinimas, spausdinami tik tų žodžių duomenys, kurių pasikartojimų skaičius didesnis negu 1. 
 Prieš atspausdinant rastus URL adresus, vartotojui suteikiamas pasirinkimas dėl rezultatų spausdinimo vietos, ar spausdinama terminale, ar faile.
+
+## Programos naudojimosi instrukcijos:
+
+- Paleidus programą, jums reikės pateikti failo pavadinimą, kurį norite analizuoti.
+- Taip pat, reikės pasirinkti, kur norite matyti URL adresų rezultatus (Terminale - T, Faile - F).
+- Rezultatus rasite: 'kiekis.txt', 'eil.txt' ir 'url_info.txt' arba terminale.
+
+### Programos veikimo pavyzdys:
+
+![alt text](programos_veikimas.png)
+
+
+### Rezultatų pavyzdžiai:
+
+'kiekis.txt' - nurodomi žodžiai bei jų pasikartojimų kiekis.
+![alt text](kiekis.png)
+
+'eil.txt' - nurodomi žodžiai bei jų pasikartojimų eilutės.
+![alt text](eil.png)
+
+'url_info.txt'- nurodoma rasti URL adresai.
+![alt text](url.png)

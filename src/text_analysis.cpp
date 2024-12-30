@@ -67,7 +67,7 @@ void spausdinimas_zodziu_eil(const map<string, pair<int, set<int>>>& zodziu_eil)
 string pasirinkimas_url(){
     string pasirinkimas;
 
-    cout << "Pasirinkite kur norite matyti url rezultatus (Terminale - T, Faile - F): ";
+    cout << "Pasirinkite kur norite matyti URL rezultatus (Terminale - T, Faile - F): ";
     while(true){
         cin >> pasirinkimas;
 
@@ -104,6 +104,7 @@ void url_paskirstymas(string pasirinkimas, vector<string> url_vektorius){
            spausdinimas_url(failas, url_vektorius);
         }
         failas.close();
+        cout << "Rezultatai išsaugoti faile 'url_info.txt'" << endl;
     }
 }
 
@@ -159,7 +160,7 @@ void failo_tvarkymas(){
             cout << e.what();
         }
     }
-    cout << "KIEKIS" << zodziu_eil.size() << " " << zodziu_kiekis.size() << endl;
+
     spausdinimas_zodziu_kiekis(zodziu_kiekis);
     spausdinimas_zodziu_eil(zodziu_eil);
     string pasirinkimas = pasirinkimas_url();
