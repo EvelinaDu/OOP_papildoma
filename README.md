@@ -32,10 +32,13 @@ Prieš atspausdinant rastus URL adresus, vartotojui suteikiamas pasirinkimas dė
 ### Rezultatų pavyzdžiai:
 
 'kiekis.txt' - nurodomi žodžiai bei jų pasikartojimų kiekis.
+
 ![alt text](kiekis.png)
 
 'eil.txt' - nurodomi žodžiai bei jų pasikartojimų eilutės.
+
 ![alt text](eil.png)
 
 'url_info.txt'- nurodoma rasti URL adresai.
+
 ![alt text](url.png)
