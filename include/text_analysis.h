@@ -16,10 +16,10 @@ void spausdinimas_zodziu_eil(const map<string, pair<int, set<int>>>& zodziu_eil)
 string pasirinkimas_url();
 
 // Funkcija, kuri atspausdina visus rastus URL adresus
-void spausdinimas_url(std::ostream &out, vector<string> url_vektorius);
+void spausdinimas_url(std::ostream &out, set<string> url_set);
 
 // Funkcija, kuri paskirsto kur atspausdinamas/įrašomas URL rezultatas.
-void url_paskirstymas(string pasirinkimas, vector<string> url_vektorius);
+void url_paskirstymas(string pasirinkimas, set<string> url_set);
 
 // Pagrindinė funkcija, kurioje vyksta nuskaitymas bei duomenų skaičiavimas, joje taip pat kviečiamos atspausdinimo funkcijos.
 void failo_tvarkymas();

@@ -85,23 +85,23 @@ string pasirinkimas_url(){
     return pasirinkimas;
 }
 
-void spausdinimas_url(std::ostream &out, vector<string> url_vektorius){
+void spausdinimas_url(std::ostream &out, const set<string> url_set){
     out  << left << setw(15) << "Rasti URL adresai: " << endl;
 
-    for (const auto& url : url_vektorius) {
+    for (const auto& url : url_set) {
         out << url << endl;
     }
 
 }
 
-void url_paskirstymas(string pasirinkimas, vector<string> url_vektorius){
+void url_paskirstymas(string pasirinkimas, const set<string> url_set){
     if(pasirinkimas == "T"){
-        spausdinimas_url(cout, url_vektorius);
+        spausdinimas_url(cout, url_set);
 
     } else if(pasirinkimas == "F"){
         ofstream failas("url_info.txt");
         if(failas.is_open()){
-           spausdinimas_url(failas, url_vektorius);
+           spausdinimas_url(failas, url_set);
         }
         failas.close();
         cout << "Rezultatai išsaugoti faile 'url_info.txt'" << endl;
@@ -115,7 +115,7 @@ void failo_tvarkymas(){
     map<string, int> zodziu_kiekis;                 // saugo žodį ir jo pasikartojimų kiekį
     map<string, pair<int, set<int>>> zodziu_eil;    // saugo žodį, jo pasikartojimų kiekį bei eilučių, kuriose buvo rastas, rinkynį
     int eil_nr = 0;
-    vector<string> url_vektorius;
+    set<string> url_set;
 
     regex url(R"(((https?://www\.)|(www\.))?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(/[^\s]*)?[.,;]?)");
 
@@ -141,7 +141,7 @@ void failo_tvarkymas(){
                         if(!zodis.empty() && (zodis.back() == '.' || zodis.back() == ',' || zodis.back() == ';')){
                             zodis.pop_back();
                         }
-                        url_vektorius.push_back(zodis);
+                        url_set.insert(zodis);
                     } else{
                         string naujas_zodis = pakeistas_zodis(zodis);
 
@@ -163,9 +163,11 @@ void failo_tvarkymas(){
 
     spausdinimas_zodziu_kiekis(zodziu_kiekis);
     spausdinimas_zodziu_eil(zodziu_eil);
+
     string pasirinkimas = pasirinkimas_url();
-    if(!url_vektorius.empty()){
-        url_paskirstymas(pasirinkimas, url_vektorius);
+
+    if(!url_set.empty()){
+        url_paskirstymas(pasirinkimas, url_set);
     } else{ 
         cout << "URL adresai nerasti." << endl;
     }
